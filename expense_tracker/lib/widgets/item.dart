@@ -1,6 +1,5 @@
 import 'package:expense_tracker/models/expenses.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class item extends StatelessWidget {
   const item(this.expense, {super.key});
@@ -26,13 +25,15 @@ class item extends StatelessWidget {
                   Text(
                     expense.category.toString(),
                   ),
+                  Icon(categoryIcons[expense.category]),
                   const SizedBox(
                     width: 25,
                   ),
                   const Icon(Icons.access_alarm),
                   Text(
-                    expense.date.toString(),
-                  )
+                    expense.formatteddate,
+                  ),
+                  
                 ],
               )
             ],
