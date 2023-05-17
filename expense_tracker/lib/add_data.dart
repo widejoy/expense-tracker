@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'models/expenses.dart';
 
 class AddData extends StatefulWidget {
   const AddData({super.key});
@@ -12,15 +13,19 @@ class AddData extends StatefulWidget {
 class _AddData extends State<AddData> {
   final _titlecontroller = TextEditingController();
   final _amountcontroller = TextEditingController();
-
-  void _datepicker() {
-    showDatePicker(
+  DateTime? _selecteddate;
+  Category _selectedcategory = Category.fruits;
+  void _datepicker() async {
+    final pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(
           DateTime.now().year - 1, DateTime.now().month, DateTime.now().day),
       lastDate: DateTime.now(),
     );
+    setState(() {
+      _selecteddate = pickedDate;
+    });
   }
 
   @override
@@ -55,10 +60,33 @@ class _AddData extends State<AddData> {
               ),
               Expanded(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text('Selected Date'),
+                    const SizedBox( width: 100,),
+                    DropdownButton(
+                      value: _selectedcategory,
+                        items: Category.values.map(
+                          (e) => DropdownMenuItem(
+                            value: e,
+                            child: Text(e.name.toUpperCase()),
+                          ),
+                        ).toList(),
+                        
+                        onChanged: (value) {
+                          if(value == null)
+                          {return;}
+                          else{
+                            setState(() {
+                              _selectedcategory = value;
+                            });
+                          }
+                        }),
+                    const SizedBox( width: 100,),
+                    Text(
+                      _selecteddate == null
+                          ? 'select a date'
+                          : format.format(_selecteddate!),
+                    ),
                     IconButton(
                       onPressed: _datepicker,
                       icon: const Icon(Icons.calendar_month),
