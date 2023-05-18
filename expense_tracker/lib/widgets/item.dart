@@ -13,7 +13,17 @@ class item extends StatelessWidget {
       child: Card(
         child: Column(
           children: [
-            Text(expense.customerName),
+            Row(
+              children: [
+                Text(expense.customerName),
+                IconButton(
+                  alignment: Alignment.topRight,
+                  color:const  Color.fromARGB(255, 236, 37, 6),
+                  onPressed: () {},
+                  icon: const Icon(Icons.close),
+                ),
+              ],
+            ),
             const SizedBox(
               height: 8,
             ),

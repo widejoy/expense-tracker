@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'models/expenses.dart';
 
 class AddData extends StatefulWidget {
-  const AddData({super.key});
-
+  const AddData(this.onAddexpense,{super.key});
+  final void Function(Expense expense) onAddexpense;
   @override
   State<AddData> createState() {
     return _AddData();
@@ -35,7 +35,7 @@ class _AddData extends State<AddData> {
     final enterednumber = double.tryParse(_amountcontroller.text);
     final amountvalid = enterednumber == null && enterednumber != 0;
 
-    if (_titlecontroller.text.trim().isEmpty || amountvalid != true) {
+    if (_titlecontroller.text.trim().isEmpty || amountvalid != false) {
       showDialog(
         context: context,
         builder: (cxt) {
@@ -55,7 +55,9 @@ class _AddData extends State<AddData> {
       );
       return;
     }
-  }
+    else{
+    widget.onAddexpense(Expense(customerName: _titlecontroller.text, amount: enterednumber!, date: _selecteddate, category: _selectedcategory));
+  }}
 
   @override
   void dispose() {
