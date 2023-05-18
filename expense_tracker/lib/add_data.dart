@@ -11,9 +11,10 @@ class AddData extends StatefulWidget {
 }
 
 class _AddData extends State<AddData> {
+  List<Map<String, Object>> enteredData = [];
   final _titlecontroller = TextEditingController();
   final _amountcontroller = TextEditingController();
-  DateTime? _selecteddate;
+  DateTime _selecteddate = DateTime.now();
   Category _selectedcategory = Category.fruits;
   void _datepicker() async {
     final pickedDate = await showDatePicker(
@@ -24,8 +25,36 @@ class _AddData extends State<AddData> {
       lastDate: DateTime.now(),
     );
     setState(() {
-      _selecteddate = pickedDate;
+      _selecteddate = pickedDate!;
     });
+  }
+
+  
+
+  void _sumbit() {
+    final enterednumber = double.tryParse(_amountcontroller.text);
+    final amountvalid = enterednumber == null && enterednumber != 0;
+
+    if (_titlecontroller.text.trim().isEmpty || amountvalid != true) {
+      showDialog(
+        context: context,
+        builder: (cxt) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: const Text('please enter a valid input'),
+            actions: [
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.pop(cxt);
+                },
+                child: const Text('okay'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
   }
 
   @override
@@ -62,30 +91,33 @@ class _AddData extends State<AddData> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox( width: 100,),
+                    const SizedBox(
+                      width: 100,
+                    ),
                     DropdownButton(
-                      value: _selectedcategory,
-                        items: Category.values.map(
-                          (e) => DropdownMenuItem(
-                            value: e,
-                            child: Text(e.name.toUpperCase()),
-                          ),
-                        ).toList(),
-                        
+                        value: _selectedcategory,
+                        items: Category.values
+                            .map(
+                              (e) => DropdownMenuItem(
+                                value: e,
+                                child: Text(e.name.toUpperCase()),
+                              ),
+                            )
+                            .toList(),
                         onChanged: (value) {
-                          if(value == null)
-                          {return;}
-                          else{
+                          if (value == null) {
+                            return;
+                          } else {
                             setState(() {
                               _selectedcategory = value;
                             });
                           }
                         }),
-                    const SizedBox( width: 100,),
+                    const SizedBox(
+                      width: 100,
+                    ),
                     Text(
-                      _selecteddate == null
-                          ? 'select a date'
-                          : format.format(_selecteddate!),
+                      format.format(_selecteddate),
                     ),
                     IconButton(
                       onPressed: _datepicker,
@@ -108,7 +140,7 @@ class _AddData extends State<AddData> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: _sumbit,
                 child: const Text('Add customer'),
               ),
             ],

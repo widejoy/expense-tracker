@@ -12,7 +12,7 @@ class LibraryList extends StatelessWidget{
           
       return ListView.builder(
         itemCount: expenses.length,
-        itemBuilder: (ctx,index) => item(data[index]),
+        itemBuilder: (ctx,index) => item(expenses[index]),
       );
     
 

@@ -1,4 +1,5 @@
 import 'package:expense_tracker/add_data.dart';
+import 'package:expense_tracker/models/expenses.dart';
 import 'package:expense_tracker/widgets/library.dart';
 import 'package:expense_tracker/models/data.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,13 @@ class Expenses extends StatefulWidget {
 }
 
 class _Expenses extends State<Expenses> {
+  final List<Expense> data = [
+
+    Expense(customerName: 'joe biden', amount: 5000, date: DateTime.now(), category: Category.dairy),
+    Expense(customerName: 'Obama bin laden', amount: 3000, date: DateTime.now(), category: Category.vegetables)
+    
+];
+
   void _openexpressovverlay() {
     showModalBottomSheet(
         context: context,
