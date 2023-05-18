@@ -13,9 +13,7 @@ class Expenses extends StatefulWidget {
 }
 
 class _Expenses extends State<Expenses> {
-  final List<Expense> data = [
-   
-  ];
+  final List<Expense> data = [];
   void _openexpressovverlay() {
     showModalBottomSheet(
         context: context,
@@ -33,21 +31,22 @@ class _Expenses extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: _openexpressovverlay,
-              icon: const Icon(Icons.add),
-              color: Colors.white,
-            )
-          ],
-          backgroundColor: const Color.fromARGB(255, 10, 57, 96),
-        ),
-        body: Column(
-          children: [
-            const Text('chart'),
-            Expanded(child: LibraryList(data)),
-          ],
-        ));
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: _openexpressovverlay,
+            icon: const Icon(Icons.add),
+            color: Colors.white,
+          )
+        ],
+        backgroundColor: const Color.fromARGB(255, 10, 57, 96),
+      ),
+      body: Column(
+        children: [
+          Expanded(child: LibraryList(data)),
+          
+        ],
+      ),
+    );
   }
 }

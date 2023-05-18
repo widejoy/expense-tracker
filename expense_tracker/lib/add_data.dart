@@ -57,7 +57,10 @@ class _AddData extends State<AddData> {
     }
     else{
     widget.onAddexpense(Expense(customerName: _titlecontroller.text, amount: enterednumber!, date: _selecteddate, category: _selectedcategory));
-  }}
+  
+  }
+  Navigator.pop(context);
+  }
 
   @override
   void dispose() {
@@ -134,7 +137,6 @@ class _AddData extends State<AddData> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
                 },
                 child: const Text(
                   'cancel',
