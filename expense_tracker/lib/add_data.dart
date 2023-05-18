@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'models/expenses.dart';
 
 class AddData extends StatefulWidget {
-  const AddData(this.onAddexpense,{super.key});
+  const AddData(this.onAddexpense, {super.key});
   final void Function(Expense expense) onAddexpense;
   @override
   State<AddData> createState() {
@@ -29,8 +29,6 @@ class _AddData extends State<AddData> {
     });
   }
 
-  
-
   void _sumbit() {
     final enterednumber = double.tryParse(_amountcontroller.text);
     final amountvalid = enterednumber == null && enterednumber != 0;
@@ -54,12 +52,14 @@ class _AddData extends State<AddData> {
         },
       );
       return;
+    } else {
+      widget.onAddexpense(Expense(
+          customerName: _titlecontroller.text,
+          amount: enterednumber!,
+          date: _selecteddate,
+          category: _selectedcategory));
     }
-    else{
-    widget.onAddexpense(Expense(customerName: _titlecontroller.text, amount: enterednumber!, date: _selecteddate, category: _selectedcategory));
-  
-  }
-  Navigator.pop(context);
+    Navigator.pop(context);
   }
 
   @override
@@ -137,6 +137,7 @@ class _AddData extends State<AddData> {
             children: [
               ElevatedButton(
                 onPressed: () {
+                  Navigator.pop(context);
                 },
                 child: const Text(
                   'cancel',
