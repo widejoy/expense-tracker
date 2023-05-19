@@ -13,7 +13,7 @@ class Expenses extends StatefulWidget {
 }
 
 class _Expenses extends State<Expenses> {
-  final List<Expense> data = [];
+  final List<Expense> data = [Expense(customerName: 'as', amount: 3, date: DateTime.now(), category: Category.fruits)];
   void _openexpressovverlay() {
     showModalBottomSheet(
         context: context,

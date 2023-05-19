@@ -1,13 +1,9 @@
-import 'package:expense_tracker/expense.dart';
 import 'package:expense_tracker/models/expenses.dart';
 import 'package:expense_tracker/widgets/item.dart';
 import 'package:flutter/material.dart';
 
-
 class LibraryList extends StatelessWidget {
   const LibraryList(this.expenses, {super.key});
-
-
 
   final List<Expense> expenses;
   @override
@@ -15,6 +11,9 @@ class LibraryList extends StatelessWidget {
     return ListView.builder(
       itemCount: expenses.length,
       itemBuilder: (ctx, index) => Dismissible(
+        background: Container(
+          color: const Color.fromARGB(255, 254, 4, 4),
+        ),
         key: ValueKey(expenses[index]),
         child: item(expenses[index]),
         onDismissed: (direction) => expenses.remove(expenses[index]),

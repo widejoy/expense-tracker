@@ -11,6 +11,7 @@ class item extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Card(
+        margin: const EdgeInsets.all(8),
         child: Column(
           children: [
             Text(expense.customerName),
