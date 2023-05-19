@@ -95,44 +95,54 @@ class _AddData extends State<AddData> {
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(
+                  children: const [
+                    SizedBox(
+                      width: 20,
+                    ),
+                   
+                    SizedBox(
                       width: 100,
                     ),
-                    DropdownButton(
-                        value: _selectedcategory,
-                        items: Category.values
-                            .map(
-                              (e) => DropdownMenuItem(
-                                value: e,
-                                child: Text(e.name.toUpperCase()),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (value) {
-                          if (value == null) {
-                            return;
-                          } else {
-                            setState(() {
-                              _selectedcategory = value;
-                            });
-                          }
-                        }),
-                    const SizedBox(
-                      width: 100,
-                    ),
-                    Text(
-                      format.format(_selecteddate),
-                    ),
-                    IconButton(
-                      onPressed: _datepicker,
-                      icon: const Icon(Icons.calendar_month),
-                    )
+                  
                   ],
                 ),
               )
             ],
           ),
+          Row(children:[
+
+            Text(
+                    format.format(_selecteddate),
+                  ),
+                  IconButton(
+                    onPressed: _datepicker,
+                    icon: const Icon(Icons.calendar_month),
+                  ),
+                  const SizedBox(width: 100,),
+                   DropdownButton(
+                      value: _selectedcategory,
+                      items: Category.values
+                          .map(
+                            (e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(e.name.toUpperCase()),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (value) {
+                        if (value == null) {
+                          return;
+                        } else {
+                          setState(() {
+                            _selectedcategory = value;
+                          });
+                        }
+                      }),
+
+          ],
+          
+          )
+            ,
           Row(
             children: [
               ElevatedButton(
@@ -149,8 +159,10 @@ class _AddData extends State<AddData> {
                 child: const Text('Add customer'),
               ),
             ],
-          )
+          ),
+          
         ],
+        
       ),
     );
   }
